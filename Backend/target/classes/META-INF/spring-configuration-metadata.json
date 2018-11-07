@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "config",
+      "type": "com.reboot.yourself.config.ConfigProvider",
+      "sourceType": "com.reboot.yourself.config.ConfigProvider"
+    }
+  ],
+  "properties": [
+    {
+      "name": "config.api-version-one",
+      "type": "java.lang.String",
+      "sourceType": "com.reboot.yourself.config.ConfigProvider"
+    },
+    {
+      "name": "config.default-api-version",
+      "type": "java.lang.String",
+      "sourceType": "com.reboot.yourself.config.ConfigProvider"
+    },
+    {
+      "name": "config.project-name",
+      "type": "java.lang.String",
+      "sourceType": "com.reboot.yourself.config.ConfigProvider"
+    },
+    {
+      "name": "config.schema-name",
+      "type": "java.lang.String",
+      "sourceType": "com.reboot.yourself.config.ConfigProvider"
+    }
+  ],
+  "hints": []
+}
