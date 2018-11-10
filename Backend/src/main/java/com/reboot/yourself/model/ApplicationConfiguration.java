@@ -22,16 +22,18 @@ public class ApplicationConfiguration {
 	private int id;
 	private String key;
 	private String value;
+	private Boolean isDelete;
 
 	public ApplicationConfiguration() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicationConfiguration(int id, String key, String value) {
+	public ApplicationConfiguration(int id, String key, String value,Boolean isDelete) {
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		this.key = key;
 		this.value = value;
+		this.isDelete = isDelete;
 	}
 
 	@Id
@@ -61,6 +63,15 @@ public class ApplicationConfiguration {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@Column(name = "isdelete")
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 }

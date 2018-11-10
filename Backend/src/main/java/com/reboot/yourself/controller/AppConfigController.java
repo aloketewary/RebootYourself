@@ -1,11 +1,17 @@
 package com.reboot.yourself.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reboot.yourself.model.ApplicationConfiguration;
+import com.reboot.yourself.service.AppConfigService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,8 +22,13 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping(value="/api")
 @Api(value="AppConfig", description="Operations pertaining to products in Online Store")
+
+
 public class AppConfigController {
 
+	@Autowired
+	private AppConfigService appConfigService;
+	
 	@ApiOperation(value = "View Default Api Version", response = ApplicationConfiguration.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -27,8 +38,10 @@ public class AppConfigController {
 	}
 	)
 	@GetMapping(value="/${config.default-api-version}/config")
-	public ApplicationConfiguration getConfig() {
-		return new ApplicationConfiguration(1, "APP_NAME", "RebootYourself");
+	public Map<String,String> getConfig() {
+		List<ApplicationConfiguration> appConfigList = new ArrayList<>();
+		return appConfigService.getConfigList();
+		//return new ApplicationConfiguration(1, "APP_NAME", "RebootYourself");
 	}
 	
 	@ApiOperation(value = "View Api Version", response = String.class)
