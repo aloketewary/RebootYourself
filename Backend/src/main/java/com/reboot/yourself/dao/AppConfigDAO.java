@@ -12,6 +12,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+
 import com.reboot.yourself.model.ApplicationConfiguration;
 
 @Transactional
@@ -19,42 +21,23 @@ public class AppConfigDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+    private HibernateTemplate hibernateTemplate;
 
+	@SuppressWarnings("unchecked")
 	public List<ApplicationConfiguration> getConfigList() {
-		/**
-		 * Selected a detached criteria so we do not need a session to run it within.
-		 */
+		List<ApplicationConfiguration> results = null;
 		try {
 			DetachedCriteria dCriteria = DetachedCriteria.forClass(ApplicationConfiguration.class);
-
-			/**
-			 * Here we are doing an inner join with the Villain table in order to do a name
-			 * comparison with the villainName passed in as a method parameter
-			 */
-			// DetachedCriteria configCriteria = criteria.createCriteria("configList");
-			/*
-			 * DetachedCriteria villainCriteria = criteria.createCriteria("enemyList");
-			 * 
-			 * villainCriteria.add(Restrictions.eq("villainName", villainName));
-			 * 
-			 * villainCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			 */
-
 			dCriteria.addOrder(Order.asc("id"));
-			/*ProjectionList projections = Projections.projectionList();
-			projections.add(Projections.property("key"));
-			projections.add(Projections.property("value"));
-			dCriteria.setProjection(projections);*/
-			@SuppressWarnings("unchecked")
-			List<ApplicationConfiguration> results = dCriteria.getExecutableCriteria(sessionFactory.getCurrentSession())
-					.list();
+			results = (List<ApplicationConfiguration>) this.hibernateTemplate.findByCriteria(dCriteria);
 			System.out.println("Result" + results);
-			return results;
+			
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
-
+		return results;
 	}
 }
