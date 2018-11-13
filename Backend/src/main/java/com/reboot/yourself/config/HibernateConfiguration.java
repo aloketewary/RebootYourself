@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -63,4 +64,20 @@ public class HibernateConfiguration {
 		txManager.setSessionFactory(s);
 		return txManager;
 	}
+	
+	
+	/**
+	 * Added for using HibernateTemplate
+	 * @author AyanD
+	 * @date 12.11.2018
+	 * */
+	@Bean
+    @Autowired
+    public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory){
+        HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
+        return hibernateTemplate;
+    }
+	
+	
+	
 }

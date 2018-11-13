@@ -17,28 +17,25 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "app_config", schema = "master")
-
-public class ApplicationConfiguration {
+public class ApplicationConfiguration extends CommonModel {
 	private int id;
 	private String key;
 	private String value;
-	private Boolean isDelete;
-
+	
 	public ApplicationConfiguration() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicationConfiguration(int id, String key, String value,Boolean isDelete) {
+	public ApplicationConfiguration(int id, String key, String value) {
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		this.key = key;
 		this.value = value;
-		this.isDelete = isDelete;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "primary_id")
 	public int getId() {
 		return id;
 	}
@@ -64,14 +61,4 @@ public class ApplicationConfiguration {
 	public void setValue(String value) {
 		this.value = value;
 	}
-
-	@Column(name = "isdelete")
-	public Boolean getIsDelete() {
-		return isDelete;
-	}
-
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
 }
